@@ -6,6 +6,7 @@ import com.acmerobotics.dashboard.config.ValueProvider;
 import com.acmerobotics.dashboard.config.variable.BasicVariable;
 import com.acmerobotics.dashboard.config.variable.CustomVariable;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.control.PIDCoefficients;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.profile.MotionProfile;
@@ -177,6 +178,14 @@ public class DriveVelocityPIDTuner extends LinearOpMode {
                 telemetry.addData("error" + i, motionState.getV() - velocities.get(i));
             }
             telemetry.update();
+
+            TelemetryPacket fasttelem = new TelemetryPacket();
+            fasttelem.put("targetVelocity", motionState.getV());
+            for (int i = 0; i < velocities.size(); i++) {
+                fasttelem.put("velocity" + i, velocities.get(i));
+                fasttelem.put("error" + i, motionState.getV() - velocities.get(i));
+            }
+            dashboard.sendTelemetryPacket(fasttelem);
         }
 
         removePidVariable();

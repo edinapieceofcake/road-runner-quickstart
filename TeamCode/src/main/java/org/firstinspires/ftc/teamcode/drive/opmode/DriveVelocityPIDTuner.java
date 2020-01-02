@@ -12,6 +12,7 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.profile.MotionProfile;
 import com.acmerobotics.roadrunner.profile.MotionProfileGenerator;
 import com.acmerobotics.roadrunner.profile.MotionState;
+import com.acmerobotics.roadrunner.trajectory.constraints.DriveConstraints;
 import com.acmerobotics.roadrunner.util.NanoClock;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -141,6 +142,7 @@ public class DriveVelocityPIDTuner extends LinearOpMode {
 
         NanoClock clock = NanoClock.system();
 
+        telemetry.addData("tickPerRev, Gearing, MaxRPM", "%f %f %f", DriveConstants.MOTOR_CONFIG.getTicksPerRev(), DriveConstants.MOTOR_CONFIG.getGearing(), DriveConstants.MOTOR_CONFIG.getMaxRPM());
         telemetry.addLine("Ready!");
         telemetry.update();
         telemetry.clearAll();

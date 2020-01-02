@@ -26,7 +26,7 @@ public class DriveConstants {
      * discrepancies. Additional motor types can be defined via an interface with the
      * @DeviceProperties and @MotorType annotations.
      */
-    private static final MotorConfigurationType MOTOR_CONFIG =
+    public static final MotorConfigurationType MOTOR_CONFIG =
             MotorConfigurationType.getMotorType(GoBILDA5202Series435.class);
 
     /*

@@ -17,7 +17,7 @@ import kotlin.Unit;
 @Config
 @Autonomous(group = "drive")
 public class StraightTest extends LinearOpMode {
-    public static double DISTANCE = 60;
+    public static double DISTANCE = 72;
 
     @Override
     public void runOpMode() throws InterruptedException {

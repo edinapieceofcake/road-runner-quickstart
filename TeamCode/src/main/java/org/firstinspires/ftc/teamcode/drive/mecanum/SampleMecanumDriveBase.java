@@ -163,7 +163,8 @@ public abstract class SampleMecanumDriveBase extends MecanumDrive {
 
         packet.put("x", currentPose.getX());
         packet.put("y", currentPose.getY());
-        packet.put("heading", currentPose.getHeading());
+        packet.put("heading", Math.toDegrees(currentPose.getHeading()));
+        packet.put("imu", Math.toDegrees(getRawExternalHeading()));
 
         packet.put("xError", lastError.getX());
         packet.put("yError", lastError.getY());
@@ -259,6 +260,9 @@ public abstract class SampleMecanumDriveBase extends MecanumDrive {
             }
         }
 
+        fieldOverlay.setStroke("#F44336");
+        DashboardUtil.drawRobot(fieldOverlay, new Pose2d(currentPose.getX(), currentPose.getY(), currentPose.getHeading()));
+
         dashboard.sendTelemetryPacket(packet);
     }
 
@@ -297,4 +301,9 @@ public abstract class SampleMecanumDriveBase extends MecanumDrive {
     public abstract PIDCoefficients getPIDCoefficients(DcMotor.RunMode runMode);
 
     public abstract void setPIDCoefficients(DcMotor.RunMode runMode, PIDCoefficients coefficients);
+
+    @Override
+    public double getRawExternalHeading() {
+        return 0.0;
+    }
 }
